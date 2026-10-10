@@ -29,7 +29,7 @@ quad_dict = np.load(data_dir + '/quad_dict.npy', allow_pickle=True).item()
 tracksgeo_path = data_dir + '/tracks_geo_region.pkl'
 tracksgeo_dict = load_tracksgeo(tracksgeo_path, dipole_dict)
 
-protrusion_df = pd.read_pickle(data_dir + "/protrusion.pkl")
+protrusion_df = pd.read_pickle(data_dir + "/protrusion_force.pkl")
 
 arpc2ko_cells, wt_cells, lengths_arpc2ko, lengths_wt, pooled_arpc2ko_df, pooled_wt_df = combine_data(tracksgeo_dict, ellipse_dict, dipole_dict, quad_dict, protrusion_df)
 
@@ -141,7 +141,7 @@ plt.savefig('{}/{}.pdf'.format(save_path, plot_name),bbox_inches='tight',format=
 plt.clf()
 
 
-params = ['area','avg_trac_mag','eccentricity','solidity','dip_ratio','turning_angle','step_length','width','length','protrusion_id','perim_ratio','perimeter','perim_area_ratio','protrusion_act','retraction_act','all_act','mean_wid','mean_len','mean_num','max_len','mean_protr_lt']
+params = ['area','avg_trac_mag','eccentricity','solidity','dip_ratio','turning_angle','step_length','width','length','protrusion_id','perim_ratio','perimeter','perim_area_ratio','protrusion_act','retraction_act','all_act','mean_wid','mean_len','mean_num','max_len','mean_protr_lt','total_force_avg','base_force_avg','mid_force_avg','tip_force_avg']
 
 save_path = './figures/stripplots_median/pdf_vp'
 

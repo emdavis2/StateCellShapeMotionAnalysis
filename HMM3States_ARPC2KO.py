@@ -127,7 +127,7 @@ tracksgeo_path = data_dir + '/tracks_geo_region.pkl'
 tracksgeo_dict = load_tracksgeo(tracksgeo_path, dipole_dict)
 
 
-protrusion_df = pd.read_pickle(data_dir + "/protrusion.pkl")
+protrusion_df = pd.read_pickle(data_dir + "/protrusion_force.pkl")
 
 arpc2ko_cells, wt_cells, lengths_arpc2ko, lengths_wt, pooled_arpc2ko_df, pooled_wt_df = combine_data(tracksgeo_dict, ellipse_dict, dipole_dict, quad_dict, protrusion_df)
 
@@ -328,7 +328,7 @@ params = ['segment_speed','area','absskew','avg_trac_mag','segment_DT','segment_
 for column in params: #numeric_segment_df_all.columns:
     plt.figure(figsize=(8, 6))
     sns.violinplot(data=median_segment_df_all, x='state', y=column, hue="state", palette=colors_for_state_plot, alpha=0.8, inner='quart', legend=False)
-    sns.swarmplot(data=median_segment_df_all, x='state', y=column, hue='track_name', palette='deep',legend=False) 
+    sns.swarmplot(data=median_segment_df_all, x='state', y=column, hue='track_name', palette='deep',legend=False,size=5) 
     state0 = median_segment_df_all.loc[median_segment_df_all["state"] == 0, column].to_numpy()
     state1 = median_segment_df_all.loc[median_segment_df_all["state"] == 1, column].to_numpy()
     state2 = median_segment_df_all.loc[median_segment_df_all["state"] == 2, column].to_numpy()
@@ -344,3 +344,20 @@ for column in params: #numeric_segment_df_all.columns:
     plt.xticks(rotation=90)
     plt.savefig('{}/{}_stripplot.pdf'.format(save_path_fig,column),bbox_inches='tight',format='pdf')
     plt.clf()
+    plt.close()
+
+#clears out sentinel file if it exists
+open('{}/number_segments_arpc2ko.txt'.format(save_path),'w').close()
+#create new sentinel file to write to
+names_trans_arpc2ko = open('{}/number_segments_arpc2ko.txt'.format(save_path),'w')
+file_lines_arpc2ko = []
+
+num_state0 = len(median_segment_df_all.loc[median_segment_df_all["state"] == 0])
+num_state1 = len(median_segment_df_all.loc[median_segment_df_all["state"] == 1])
+num_state2 = len(median_segment_df_all.loc[median_segment_df_all["state"] == 2])
+
+file_lines_arpc2ko.append('Number segments low state \n {} \n'.format(num_state0) + '\n Number segments med state  \n {}'.format(num_state1) + '\n Number segments high state \n {}'.format(num_state2))
+
+#write lines to text file 
+names_trans_arpc2ko.writelines(file_lines_arpc2ko)
+names_trans_arpc2ko.close() 

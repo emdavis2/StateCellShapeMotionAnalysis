@@ -184,16 +184,25 @@ def combine_data(tracksgeo_dict, ellipse_dict, dipole_dict, quad_dict, protrusio
             new_df['dishnum'] = dishnum*limit
             new_df['name'] = (new_df['date']).astype('int').astype('str') + '_' + (new_df['type']).astype('str') + '_movie' + (new_df['movie']).astype('int').astype('str') + '_track' + (new_df['track_id']).astype('int').astype('str') + '_t' + (new_df['frame']).astype('int').astype('str') + '.tif'
             med_protr_length = protrusion_df.groupby(["name"])["length"].median() * pixel_size
-            # med_protr_width75 = protrusion_df.groupby(["name"])["width_75"].median() * pixel_size
             med_protr_width = protrusion_df.groupby(["name"])["width"].median() * pixel_size
+            med_protr_forceavg = protrusion_df.groupby(["name"])["total_force_avg"].median()
+            med_protr_forcebaseavg = protrusion_df.groupby(["name"])["base_force_avg"].median()
+            med_protr_forcemidavg = protrusion_df.groupby(["name"])["mid_force_avg"].median()
+            med_protr_forcetipavg = protrusion_df.groupby(["name"])["tip_force_avg"].median()
             protr_num = protrusion_df.groupby(["name"])["protrusion_id"].count()
+            tot_protr_traction_avg = (protrusion_df.groupby(["name"])['total_force_avg'].sum().rename('tot_protr_traction_avg'))
             new_df = pd.merge(new_df, med_protr_length, on="name")
-            # new_df = pd.merge(new_df, med_protr_width75, on="name")
             new_df = pd.merge(new_df, med_protr_width, on="name")
+            new_df = pd.merge(new_df, med_protr_forceavg, on="name")
+            new_df = pd.merge(new_df, med_protr_forcebaseavg, on="name")
+            new_df = pd.merge(new_df, med_protr_forcemidavg, on="name")
+            new_df = pd.merge(new_df, med_protr_forcetipavg, on="name")
             new_df = pd.merge(new_df, protr_num, on="name")
+            new_df = pd.merge(new_df, tot_protr_traction_avg, on="name")
             new_df = pd.merge(new_df, perimratio_df, on="name")
             new_df = pd.merge(new_df, protact_df, on="name")
             new_df = pd.merge(new_df, cellgeo_df, on="name")
+            new_df['cell_body_traction_avg'] = new_df['avg_trac_mag'] - new_df['tot_protr_traction_avg']
             arpc2ko_cells.append(new_df)
         elif 'WT' in name and '20250130' not in name and 'Bleb' not in name:
             track_names_wt.append(name)
@@ -295,16 +304,25 @@ def combine_data(tracksgeo_dict, ellipse_dict, dipole_dict, quad_dict, protrusio
             new_df['dishnum'] = dishnum*limit
             new_df['name'] = (new_df['date']).astype('int').astype('str') + '_' + (new_df['type']).astype('str') + '_movie' + (new_df['movie']).astype('int').astype('str') + '_track' + (new_df['track_id']).astype('int').astype('str') + '_t' + (new_df['frame']).astype('int').astype('str') + '.tif'
             med_protr_length = protrusion_df.groupby(["name"])["length"].median() * pixel_size
-            # med_protr_width75 = protrusion_df.groupby(["name"])["width_75"].median() * pixel_size
             med_protr_width = protrusion_df.groupby(["name"])["width"].median() * pixel_size
+            med_protr_forceavg = protrusion_df.groupby(["name"])["total_force_avg"].median()
+            med_protr_forcebaseavg = protrusion_df.groupby(["name"])["base_force_avg"].median()
+            med_protr_forcemidavg = protrusion_df.groupby(["name"])["mid_force_avg"].median()
+            med_protr_forcetipavg = protrusion_df.groupby(["name"])["tip_force_avg"].median()
             protr_num = protrusion_df.groupby(["name"])["protrusion_id"].count()
+            tot_protr_traction_avg = (protrusion_df.groupby(["name"])['total_force_avg'].sum().rename("tot_protr_traction_avg"))
             new_df = pd.merge(new_df, med_protr_length, on="name")
-            # new_df = pd.merge(new_df, med_protr_width75, on="name")
             new_df = pd.merge(new_df, med_protr_width, on="name")
+            new_df = pd.merge(new_df, med_protr_forceavg, on="name")
+            new_df = pd.merge(new_df, med_protr_forcebaseavg, on="name")
+            new_df = pd.merge(new_df, med_protr_forcemidavg, on="name")
+            new_df = pd.merge(new_df, med_protr_forcetipavg, on="name")
             new_df = pd.merge(new_df, protr_num, on="name")
+            new_df = pd.merge(new_df, tot_protr_traction_avg, on="name")
             new_df = pd.merge(new_df, perimratio_df, on="name")
             new_df = pd.merge(new_df, protact_df, on="name")
             new_df = pd.merge(new_df, cellgeo_df, on="name")
+            new_df['cell_body_traction_avg'] = new_df['avg_trac_mag'] - new_df['tot_protr_traction_avg']
             wt_cells.append(new_df)
     
     

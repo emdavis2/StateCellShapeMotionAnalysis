@@ -4,12 +4,20 @@ from scipy.stats import mannwhitneyu
 
 #https://www.geeksforgeeks.org/machine-learning/permutation-tests-in-machine-learning/#what-are-permutation-tests
 def permutation_test(group_a, group_b, num_permutations=10000):
+    group_a = np.asarray(group_a)
+    group_b = np.asarray(group_b)
+
+    group_a = group_a[~np.isnan(group_a)]
+    group_b = group_b[~np.isnan(group_b)]
+
+    seed = 66
+    rng = np.random.default_rng(seed)
     observed_statistic = np.median(group_a) - np.median(group_b)
     combined_data = np.concatenate((group_a, group_b))
     permuted_statistics = []
 
     for _ in range(num_permutations):
-        np.random.shuffle(combined_data)
+        rng.shuffle(combined_data)
         perm_group_a = combined_data[:len(group_a)]
         perm_group_b = combined_data[len(group_a):]
         perm_statistic = np.median(perm_group_a) - np.median(perm_group_b)
