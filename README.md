@@ -46,8 +46,8 @@ To generate Figures 8, S11, and S12, run the file `FiltArea_Plot_Protrusions_3St
 
 To generate Figure S13 (A-D), run the file `Plot_Cell_Stats.py`
 
-## Code mentioned in the Results section
-### FA distance from cell edge
+## Code mentioned in Results section
+### Adhesion distance from cell edge
 To measure the normalized distance of adhesions to the cell edge, `FA_analysis/processing_code/Get_Spatial_FA_Data.py` is used.
 
 ## Code mentioned in Methods section
