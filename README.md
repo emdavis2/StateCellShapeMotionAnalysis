@@ -48,7 +48,7 @@ To generate Figure S13 (A-D), run the file `Plot_Cell_Stats.py`
 
 ## Code mentioned in Results section
 ### Adhesion distance from cell edge
-To measure the normalized distance of adhesions to the cell edge, `FA_analysis/processing_code/Get_Spatial_FA_Data.py` is used.
+To measure the normalized distance of adhesions to the cell edge, the adhesion masks output from the Focal Adhesion Analysis Server (FAAS) (Berginski and Gomez, 2013) are used along with the cell masks in `FA_analysis/processing_code/Get_Spatial_FA_Data.py`.
 
 ## Code mentioned in Methods section
 ### Image processing
