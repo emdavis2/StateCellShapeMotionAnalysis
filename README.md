@@ -20,9 +20,9 @@ To generate Figures 5 (C-H), 7 (F), and Fig. S10 (A, B), run the file `Plot_Stri
 
 To generate Figures 3 (A, E-H) and S2 (B-F), run the file `HMM3States_WT.py`
 
-To generate Figures 6 (A, E-H) and S5 (B-F), run the file `HMM3States_ARPC2KO.py`
+To generate Figures 6 (A, E-H) and S6 (B-F), run the file `HMM3States_ARPC2KO.py`
 
-To generate Figures S2 (A) and S5 (A), run the file `AICBIC_WT.py` and `AICBIC_ARPC2KO.py`
+To generate Figures S2 (A) and S6 (A), run the file `AICBIC_WT.py` and `AICBIC_ARPC2KO.py`
 
 To generate Figure 3 (B, C), run the file `Plot_States_For_Track_WT_3States.py`
 
@@ -32,11 +32,11 @@ To generate Figures 4 (D, E) and S3 (A-D), run the file `FA_analysis/QuantileThr
 
 To generate Figures 4 (F) and S3 (E, F), run the file `FA_analysis/Plot_Pax_Data.py`
 
-To generate Figure S6 (A), run the file`CompareWTArpc2KOStates.py`
+To generate Figure S7 (A), run the file`CompareWTArpc2KOStates.py`
 
-To generate Figure S6 (B-D), run the file `ChangeInShape.py`
+To generate Figure S7 (B-D), run the file `ChangeInShape.py`
 
-To generate Figure S7, run the file `HMM3_Transition_Stats.py`
+To generate Figure S5, run the file `HMM3_Transition_Stats.py`
 
 To generate Figures 7 (B-D) and S10 (C, D), run the file `FiltArea_Plot_Protrusions.py`
 
